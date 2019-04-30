@@ -4,9 +4,12 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -63,11 +66,7 @@ public class Login {
 	@When("^user clicks Tops in Women$")
 	public void user_clicks_Tops_in_Women() throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
-//		WebElement womenBtn=driver.findElement(By.xpath("//input[contains(@class,'search_query')]"));
-//    	Assert.assertTrue("",womenBtn.isDisplayed());
-//    	womenBtn.click();
-//    	womenBtn.sendKeys("Women");
-		 driver.findElement(By.xpath("Tops")).click();
+		driver.findElement(By.xpath("//a[@class='img' and @title='Tops']")).click();
 	    
 	}
 
@@ -77,4 +76,44 @@ public class Login {
 		WebElement element1=driver.findElement(By.xpath("//span[contains(@class,'category')]"));
 	   Assert.assertTrue("in tops page",element1.isDisplayed());
 	}
+	@When("^user clicks on Tshirts option in Tops$")
+	public void user_clicks_on_Tshirts_option_in_Tops() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	   driver.findElement(By.xpath("//a[@class='img' and @title='T-shirts']")).click();
+	   //driver.findElement(By.xpath("//a[@class='product_img_link' and @title='Faded Short Sleeve T-shirts']")).click();
+	   driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//	   Actions actions=new Actions(driver);
+//       WebElement element_cart=driver.findElement(By.xpath("//span[text()='Add to cart']"));
+////	   actions.moveToElement(element_cart).click().build().perform();
+//	   JavascriptExecutor executor = (JavascriptExecutor)driver;
+//	   executor.executeScript("arguments[0].click();", element_cart);
+//	   driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//	   WebElement element_Proceed_To_checkout=driver.findElement(By.xpath("//a[@title='Proceed to checkout']"));
+//	   executor.executeScript("arguments[0].click();", element_Proceed_To_checkout);
+//	   driver.findElement(By.xpath("//a[@title='Proceed to checkout'and @class='button btn btn-default standard-checkout button-medium']")).click();
+	}
+	@When("^user selects and adds a tshirt to cart$")
+	public void user_selects_and_adds_a_tshirt_to_cart() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+		//driver.findElement(By.xpath("//a[@class='product_img_link' and @title='Faded Short Sleeve T-shirts']")).click();
+		//driver.findElement(By.xpath("//a[@class='product_img_link' and @title='Faded Short Sleeve T-shirts' and not(span[text()='Quick view'])]]")).click();
+		WebElement element_cart=driver.findElement(By.xpath("//span[text()='Add to cart']"));
+//		   actions.moveToElement(element_cart).click().build().perform();
+		   JavascriptExecutor executor = (JavascriptExecutor)driver;
+		   executor.executeScript("arguments[0].click();", element_cart);
+		   driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		  // driver.findElement(By.xpath("//b[text()='Cart']")).click();
+	}
+
+	@When("^user proceeds to checkout$")
+	public void user_proceeds_to_checkout() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+		driver.findElement(By.xpath("//div[@id='layer_cart']")).click();
+		WebElement element_Proceed_To_checkout=driver.findElement(By.xpath("//a[@title='Proceed to checkout']"));
+		Actions actions=new Actions(driver);
+	   actions.moveToElement(element_Proceed_To_checkout).click().build().perform();
+//		JavascriptExecutor executor = (JavascriptExecutor)driver;
+//		   executor.executeScript("arguments[0].click();", element_Proceed_To_checkout);
+	}
 }
+
