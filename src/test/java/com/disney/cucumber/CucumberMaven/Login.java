@@ -58,7 +58,7 @@ public class Login {
 	    	
 	    	driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	    	WebElement womenBtn=driver.findElement(By.xpath("//li//a[@title='Women']"));
-	    	Assert.assertTrue("",womenBtn.isDisplayed());
+	    	Assert.assertTrue("WOMEN BUTTON NOT DISPLAYED",womenBtn.isDisplayed());
 	    	womenBtn.click();
 	    }
 	      
@@ -108,10 +108,12 @@ public class Login {
 	@When("^user proceeds to checkout$")
 	public void user_proceeds_to_checkout() throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
-		driver.findElement(By.xpath("//div[@id='layer_cart']")).click();
-		WebElement element_Proceed_To_checkout=driver.findElement(By.xpath("//a[@title='Proceed to checkout']"));
-		Actions actions=new Actions(driver);
-	   actions.moveToElement(element_Proceed_To_checkout).click().build().perform();
+		//driver.findElement(By.xpath("//div[@id='layer_cart']")).click();
+		WebElement element_Proceed_To_checkout=driver.findElement(By.xpath("//*[@id='layer_cart']/div[1]/div[2]/div[4]/a/span"));
+		element_Proceed_To_checkout.click();
+		
+//		Actions actions=new Actions(driver);
+//	   actions.moveToElement(element_Proceed_To_checkout).click().build().perform();
 //		JavascriptExecutor executor = (JavascriptExecutor)driver;
 //		   executor.executeScript("arguments[0].click();", element_Proceed_To_checkout);
 	}
